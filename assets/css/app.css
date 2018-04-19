@@ -1,0 +1,9 @@
+#map {
+	height: 100%;
+	width: 100%;
+}
+
+.dropzone {
+	z-index: 1000;
+	font-family: sans-serif;
+}
