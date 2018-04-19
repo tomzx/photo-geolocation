@@ -1,25 +1,29 @@
-$(document).ready(function() {
-	var dropzoneContainer = $('body');
-	var dropzone = $('.dropzone');
+(function() {
+	var dropzoneContainer = document.querySelector('body');
+	var dropzone = document.querySelector('.dropzone');
 
-	dropzoneContainer.on('drag dragstart dragend dragover dragenter dragleave drop', function(event) {
+	let addEventListeners = function(element, events, callback) {
+		events.split(' ').map(event => element.addEventListener(event, callback));
+	};
+
+	addEventListeners(dropzoneContainer, 'drag dragstart dragend dragover dragenter dragleave drop', function(event) {
 		event.preventDefault();
 		event.stopPropagation();
 	});
 
-	dropzoneContainer.on('dragover dragenter', function() {
-		dropzoneContainer.addClass('is-dragover');
+	addEventListeners(dropzoneContainer, 'dragover dragenter', function() {
+		dropzoneContainer.classList.add('is-dragover');
 	});
 
-	dropzone.on('dragleave dragend drop', function(e) {
-		dropzoneContainer.removeClass('is-dragover');
+	addEventListeners(dropzone, 'dragleave dragend drop', function(e) {
+		dropzoneContainer.classList.remove('is-dragover');
 	});
 
-	dropzone.on('drop', function(event) {
-		var files = event.originalEvent.dataTransfer.files;
+	addEventListeners(dropzone, 'drop', function(event) {
+		var files = event.dataTransfer.files;
 		for (var i = 0; i < files.length; ++i) {
 			var file = files.item(i);
 			processFile(file);
 		}
 	});
-});
+})();

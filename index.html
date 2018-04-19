@@ -1,17 +1,26 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Photo geolocation</title>
 	<link rel="stylesheet" href="assets/css/dropzone.css">
 	<link rel="stylesheet" href="assets/css/leaflet.css">
 	<link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
+	<div class="help">
+		<h1>Welcome to <strong>Photo Geolocation</strong>.</h1>
+
+		<p>The purpose of this tool is let you see on a map where you took photos without having to send them to a server.</p>
+
+		<h1>Getting Started</h1>
+
+		<p>To get started, simply drag and drop the photos you want to view in this window.<br>You may drag and drop additional photos onto the map at any time.</p>
+	</div>
 	<div id="map"></div>
-	<div class="dropzone">Drop any image here</div>
+	<div class="dropzone">Drop any photo here</div>
 
 	<script src="assets/js/leaflet.js"></script>
-	<script src="assets/js/jquery-3.3.1.min.js"></script>
 	<script src="assets/js/dropzone.js"></script>
 	<script src="assets/js/exif.js"></script>
 	<script src="assets/js/moment.min.js"></script>

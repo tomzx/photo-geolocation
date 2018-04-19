@@ -12,6 +12,9 @@ let gpsToNumber = function(coordinate, direction) {
 
 let processFile = function(file) {
 	EXIF.getData(file, function() {
+		let helpDiv = document.querySelector('.help');
+		helpDiv.style.display = 'none';
+
 		let exifData = this.exifdata;
 		let date = moment(exifData.DateTime, 'YYYY:MM:DD HH:mm:ss');
 
@@ -20,21 +23,17 @@ let processFile = function(file) {
 			return;
 		}
 
-		var reader = new FileReader();
-		reader.onload = function(event) {
-			let img = document.createElement('img');
-			img.src = event.target.result;
-			img.style.width = 500;
+		let img = document.createElement('img');
+		img.src = URL.createObjectURL(file);
+		img.style.width = 500;
 
-			let position = [
-				gpsToNumber(exifData.GPSLatitude, exifData.GPSLatitudeRef),
-				gpsToNumber(exifData.GPSLongitude, exifData.GPSLongitudeRef),
-			];
-			let popup = L.popup({
-				maxWidth: 500,
-			}).setContent(img);
-			L.marker(position).addTo(map).bindPopup(popup);
-		}
-		reader.readAsDataURL(file);
+		let position = [
+			gpsToNumber(exifData.GPSLatitude, exifData.GPSLatitudeRef),
+			gpsToNumber(exifData.GPSLongitude, exifData.GPSLongitudeRef),
+		];
+		let popup = L.popup({
+			maxWidth: 500,
+		}).setContent(img);
+		L.marker(position).addTo(map).bindPopup(popup);
 	});
 };
